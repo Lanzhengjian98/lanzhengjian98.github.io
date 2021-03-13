@@ -30,7 +30,7 @@ const ap = new APlayer({
       {
         name: '高山低谷',
         artist: '林奕匡',
-        lrc: 'http://qpugd0hk7.hn-bkt.clouddn.com/music/lrc/高山低谷-林奕匡.lrc',
+        lrc: 'http://qpugd0hk7.hn-bkt.clouddn.com/music/lrc/%E9%AB%98%E5%B1%B1%E4%BD%8E%E8%B0%B7-%E6%9E%97%E5%A5%95%E5%8C%A1.lrc',
         cover: 'http://p4.music.126.net/-Ghh732Mw5P7SroEr954qA==/6011030069358994.jpg?param=300x300',
         url: 'http://music.163.com/song/media/outer/url?id=28457932.mp3'
       }
