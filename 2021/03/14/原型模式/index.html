@@ -6,23 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>ConcurrentModificationException异常处理 | Lanzhengjian98</title>
+  <title>原型模式 | Lanzhengjian98</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ConcurrentModificationException异常出现情景ConcurrentModificationException异常通常是由于在集合遍历时删除集合中的元素造成，如下述代码：">
+  <meta name="description" content="介绍这种模式实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采用这种模式。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ConcurrentModificationException异常处理">
-<meta property="og:url" content="http://example.com/2021/03/13/ConcurrentModificationException%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/index.html">
+<meta property="og:title" content="原型模式">
+<meta property="og:url" content="http://example.com/2021/03/14/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Lanzhengjian98">
-<meta property="og:description" content="ConcurrentModificationException异常出现情景ConcurrentModificationException异常通常是由于在集合遍历时删除集合中的元素造成，如下述代码：">
+<meta property="og:description" content="介绍这种模式实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采用这种模式。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://qpugd0hk7.hn-bkt.clouddn.com/image/ConcurrentModificationException%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/ConcurrentModificationException.png">
-<meta property="article:published_time" content="2021-03-13T03:58:27.000Z">
-<meta property="article:modified_time" content="2021-03-13T08:14:16.055Z">
+<meta property="og:image" content="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E5%8E%9F%E7%90%86%E5%9B%BE.png">
+<meta property="og:image" content="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png">
+<meta property="article:published_time" content="2021-03-14T13:54:37.000Z">
+<meta property="article:modified_time" content="2021-03-15T02:00:05.401Z">
 <meta property="article:author" content="Mr Lan">
-<meta property="article:tag" content="Java">
-<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://qpugd0hk7.hn-bkt.clouddn.com/image/ConcurrentModificationException%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/ConcurrentModificationException.png">
+<meta name="twitter:image" content="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E5%8E%9F%E7%90%86%E5%9B%BE.png">
   
     <link rel="alternative" href="/atom.xml" title="Lanzhengjian98" type="application/atom+xml">
   
@@ -192,60 +192,134 @@
           </div>
           <div id="js-content" class="content-ll">
             
-<article id="post-ConcurrentModificationException异常处理" class="article article-type-post " itemscope itemprop="blogPost">
+<article id="post-原型模式" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      ConcurrentModificationException异常处理
+      原型模式
     </h1>
   
 
         
-        <a href="/2021/03/13/ConcurrentModificationException%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" class="archive-article-date">
-  	<time datetime="2021-03-13T03:58:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-13</time>
+        <a href="/2021/03/14/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
+  	<time datetime="2021-03-14T13:54:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-14</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="ConcurrentModificationException异常出现情景"><a href="#ConcurrentModificationException异常出现情景" class="headerlink" title="ConcurrentModificationException异常出现情景"></a>ConcurrentModificationException异常出现情景</h2><p>ConcurrentModificationException异常通常是由于在集合遍历时删除集合中的元素造成，如下述代码：  </p>
-<span id="more"></span>
-
-<pre><code class="java">public static void main(String[] args) &#123;
-    ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
-    list.add(2);
-    Iterator&lt;Integer&gt; iterator = list.iterator();
-    while (iterator.hasNext()) &#123;
-        Integer integer = iterator.next();
-        if(integer == 2) &#123;
-            list.remove(integer);
-        &#125;
-    &#125;
-&#125;
-</code></pre>
-<p>运行结果：</p>
-<p><img src="http://qpugd0hk7.hn-bkt.clouddn.com/image/ConcurrentModificationException%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/ConcurrentModificationException.png" alt="ConcurrentModificationException异常"></p>
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>这种模式实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采用这种模式。<span id="more"></span>例如，一个对象需要在一个高代价的数据库操作之后被创建。我们可以缓存该对象，在下一个请求时返回它的克隆，在需要的时候更新数据库，一次来减少数据库调用。  </p>
 <hr>
-<h2 id="ConcurrentModificationException异常处理方法"><a href="#ConcurrentModificationException异常处理方法" class="headerlink" title="ConcurrentModificationException异常处理方法"></a>ConcurrentModificationException异常处理方法</h2><p>在iterator遍历集合时是引用的集合中的元素，所以才会出现在删除集合中元素时，导致iteration的引用找不到，就出现了这个错误。因此，想要解决这个异常，可以直接利用引用来删除这个元素，所以需要把代码改成如下：</p>
-<pre><code class="java">public static void main(String[] args) &#123;
-    ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
-    list.add(2);
-    System.out.println(list);   //这里我打印了遍历前后的元素，用于检验是否删除成功
-    Iterator&lt;Integer&gt; iterator = list.iterator();
-    while (iterator.hasNext()) &#123;
-        Integer integer = iterator.next();
-        if(integer == 2) &#123;
-            literator.remove();  //看这里！！！
-        &#125;
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>我们将创建一个抽象类Shape和扩展了Shape的实体类。下一步是定义类ShapeCache，该类把Shape对象存储在一个HashTable中，并在请求的时候返回它们的克隆。<br>PrototypePatterDemo类使用ShapeCache类来获取Shape对象。<br>其原理图如下：<br><img src="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E5%8E%9F%E7%90%86%E5%9B%BE.png" alt="原型模式原理图">  </p>
+<h3 id="步骤1"><a href="#步骤1" class="headerlink" title="步骤1"></a>步骤1</h3><p>创建一个实现了Cloneable接口的抽象类：  </p>
+<pre><code class="java">public abstract class Shape implements Cloneable&#123;
+    private String id;
+    protected String type;
+
+    abstract void draw();
+
+    public String getType() &#123;
+        return type;
     &#125;
-    System.out.println(list);
+
+    public String getId() &#123;
+        return id;
+    &#125;
+
+    public void setId(String id) &#123;
+        this.id = id;
+    &#125;
+    
+    public Object clone() &#123;
+        Object clone = null;
+        try &#123;
+            clone = super.clone();
+        &#125; catch (CloneNotSupportedException e) &#123;
+            e.printStackTrace();
+        &#125;
+        return clone;
+    &#125;
 &#125;
 </code></pre>
-<p>此时的运行结果为：<br>![运行结果]<a target="_blank" rel="noopener" href="http://qpugd0hk7.hn-bkt.clouddn.com/image/ConcurrentModificationException%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/correntAns.png">http://qpugd0hk7.hn-bkt.clouddn.com/image/ConcurrentModificationException%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/correntAns.png</a>)</p>
+<h3 id="步骤2"><a href="#步骤2" class="headerlink" title="步骤2"></a>步骤2</h3><p>创建扩展了上面抽象类的实体类：  </p>
+<pre><code class="java">public class Circle extends Shape&#123;
+    public Circle() &#123;
+        type = &quot;Circle&quot;;
+    &#125;
+
+    @Override
+    void draw() &#123;
+        System.out.println(&quot;调用了Circle内部的draw方法！&quot;);
+    &#125;
+&#125;
+</code></pre>
+<pre><code class="java">public class Square extends Shape&#123;
+    public Square() &#123;
+        type = &quot;Square&quot;;
+    &#125;
+
+    @Override
+    void draw() &#123;
+        System.out.println(&quot;调用了Square内部的draw方法！&quot;);
+    &#125;
+&#125;
+</code></pre>
+<pre><code class="java">public class Recrangle extends Shape&#123;
+    public Recrangle() &#123;
+        type = &quot;Rectangle&quot;;
+    &#125;
+
+    @Override
+    void draw() &#123;
+        System.out.println(&quot;调用了Rectangle内部的draw方法！&quot;);
+    &#125;
+&#125;
+</code></pre>
+<h3 id="步骤3"><a href="#步骤3" class="headerlink" title="步骤3"></a>步骤3</h3><p>创建一个类，从数据库后去实体类，并把它们存储在一个HashTable中：</p>
+<pre><code class="java">public class ShapeCache &#123;
+    private static Hashtable&lt;String,Shape&gt; shapeMap = new Hashtable&lt;&gt;();
+    
+    public static Shape getShape(String shapeName) &#123;
+        Shape cacheShape = shapeMap.get(shapeName);
+        return (Shape) cacheShape.clone();
+    &#125;
+    
+    public static void loadCache() &#123;
+        Circle circle = new Circle();
+        circle.setId(&quot;CIRCLE&quot;);
+        shapeMap.put(circle.getId(), circle);
+        
+        Square square = new Square();
+        square.setId(&quot;SQUARE&quot;);
+        shapeMap.put(square.getId(), square);
+        
+        Recrangle recrangle = new Recrangle();
+        recrangle.setId(&quot;RECTANGLE&quot;);
+        shapeMap.put(recrangle.getId(), recrangle);
+    &#125;
+&#125;
+</code></pre>
+<h3 id="步骤4"><a href="#步骤4" class="headerlink" title="步骤4"></a>步骤4</h3><p>PrototypePatternDemo使用ShapeCache类来获取存储在Hashtable中的形状的克隆：  </p>
+<pre><code class="java">public class PrototypePatternDemo &#123;
+    public static void main(String[] args) &#123;
+        ShapeCache.loadCache();
+
+        Shape clonedShape1 = ShapeCache.getShape(&quot;1&quot;);
+        System.out.println(&quot;Shape : &quot; + clonedShape1.getType());
+
+        Shape clonedShape2 = ShapeCache.getShape(&quot;2&quot;);
+        System.out.println(&quot;Shape : &quot; + clonedShape2.getType());
+
+        Shape clonedShape3 = ShapeCache.getShape(&quot;3&quot;);
+        System.out.println(&quot;Shape : &quot; + clonedShape3.getType());
+    &#125;
+&#125;
+</code></pre>
+<h3 id="步骤5"><a href="#步骤5" class="headerlink" title="步骤5"></a>步骤5</h3><p>执行程序，输出结果：<br><img src="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png" alt="运行结果"></p>
 
       
 
@@ -285,11 +359,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
         		</li>
       		
 		</ul>
@@ -344,7 +414,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://lanzhengjian98.github.io/2021/03/13/ConcurrentModificationException%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://lanzhengjian98.github.io/2021/03/14/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -358,18 +428,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/03/13/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/03/15/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          工厂模式
+          适配器模式
         
       </div>
     </a>
   
   
-    <a href="/2021/03/12/%E6%9D%A5%EF%BC%81%E5%B9%B2%E4%BA%86%E8%BF%99%E7%A2%97%E6%AF%92%E9%B8%A1%E6%B1%A4%EF%BC%81/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">来！干了这碗毒鸡汤！</div>
+    <a href="/2021/03/14/%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">建造者模式</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -396,7 +466,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ConcurrentModificationException%E5%BC%82%E5%B8%B8%E5%87%BA%E7%8E%B0%E6%83%85%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">ConcurrentModificationException异常出现情景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ConcurrentModificationException%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">ConcurrentModificationException异常处理方法</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A41"><span class="toc-number">2.1.</span> <span class="toc-text">步骤1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A42"><span class="toc-number">2.2.</span> <span class="toc-text">步骤2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A43"><span class="toc-number">2.3.</span> <span class="toc-text">步骤3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A44"><span class="toc-number">2.4.</span> <span class="toc-text">步骤4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A45"><span class="toc-number">2.5.</span> <span class="toc-text">步骤5</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
