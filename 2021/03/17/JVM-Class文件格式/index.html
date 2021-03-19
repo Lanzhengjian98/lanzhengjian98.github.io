@@ -6,15 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2021 | Lanzhengjian98</title>
+  <title>JVM:Class文件格式 | Lanzhengjian98</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Lanzhengjian98">
-<meta property="og:url" content="http://example.com/archives/2021/index.html">
+  <meta name="description" content="从编码到执行java编写好的代码到计算机运行，需要通过虚拟机（JVM）进行编译才能让计算机的硬件识别并进行相应的运算。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM:Class文件格式">
+<meta property="og:url" content="http://example.com/2021/03/17/JVM-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Lanzhengjian98">
+<meta property="og:description" content="从编码到执行java编写好的代码到计算机运行，需要通过虚拟机（JVM）进行编译才能让计算机的硬件识别并进行相应的运算。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://qpugd0hk7.hn-bkt.clouddn.com/image/JVM-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/%E6%B5%81%E7%A8%8B%E5%9B%BE.png">
+<meta property="og:image" content="http://qpugd0hk7.hn-bkt.clouddn.com/image/JVM-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/%E8%A7%A3%E9%87%8A%E5%99%A8%E6%B7%B7%E5%90%88%E8%BF%90%E8%A1%8C.png">
+<meta property="og:image" content="http://qpugd0hk7.hn-bkt.clouddn.com/image/JVM-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/JVM%E4%B8%8EJDK%E7%9A%84%E5%85%B3%E7%B3%BB.png">
+<meta property="og:image" content="http://qpugd0hk7.hn-bkt.clouddn.com/image/JVM-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/%E5%AD%97%E8%8A%82%E7%A0%81%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="http://qpugd0hk7.hn-bkt.clouddn.com/image/JVM-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/%E5%AD%97%E8%8A%82%E7%A0%81%E8%A7%A3%E9%87%8A.png">
+<meta property="article:published_time" content="2021-03-17T13:57:10.000Z">
+<meta property="article:modified_time" content="2021-03-19T05:42:22.977Z">
 <meta property="article:author" content="Mr Lan">
+<meta property="article:tag" content="JVM">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qpugd0hk7.hn-bkt.clouddn.com/image/JVM-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/%E6%B5%81%E7%A8%8B%E5%9B%BE.png">
   
     <link rel="alternative" href="/atom.xml" title="Lanzhengjian98" type="application/atom+xml">
   
@@ -184,35 +195,217 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+<article id="post-JVM-Class文件格式" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/17/JVM-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2021-03-17T13:57:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-17</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/17/JVM-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/">JVM:Class文件格式</a>
+    <h1 class="article-title" itemprop="name">
+      JVM:Class文件格式
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2021/03/17/JVM-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/" class="archive-article-date">
+  	<time datetime="2021-03-17T13:57:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="从编码到执行"><a href="#从编码到执行" class="headerlink" title="从编码到执行"></a>从编码到执行</h2><p>java编写好的代码到计算机运行，需要通过虚拟机（JVM）进行编译才能让计算机的硬件识别并进行相应的运算。  </p>
+<span id="more"></span>
+<p><img src="http://qpugd0hk7.hn-bkt.clouddn.com/image/JVM-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt="流程图">  </p>
+<ul>
+<li><p><strong>X.java</strong>：java源码文件  </p>
+</li>
+<li><p><strong>javac</strong>：java语言编译器，全称为java compiler。  </p>
+</li>
+<li><p><strong>X.class</strong>：字节码文件，由语言编译器编译生成。  </p>
+</li>
+<li><p><strong>类加载器（Class Loader）</strong>：JVM其实并不会区分是什么语言编写而生成的字节码文件，它只会判断这个字节码文件是否符合标准，然后将这个字节码文件加载进内存，并把java类库也加载进内存。  </p>
+</li>
+<li><p><strong>java类库</strong>：java语言自己所包含的类库。  </p>
+</li>
+<li><p><strong>字节码解释器</strong>：将加载进内存的字节码文件读取解释为相应的指令，并发送给执行引擎。  </p>
+</li>
+<li><p><strong>JIT即时编译器</strong>：即时的编译一些特定的、常用的代码，从而提高编译的效率。通常情况下都是字节码解释器和JIT混合编译。<br><img src="http://qpugd0hk7.hn-bkt.clouddn.com/image/JVM-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/%E8%A7%A3%E9%87%8A%E5%99%A8%E6%B7%B7%E5%90%88%E8%BF%90%E8%A1%8C.png" alt="混合编译">  </p>
+</li>
+<li><p><strong>执行引擎</strong>：按照编译器编译出的指令运行。  </p>
+</li>
+</ul>
+<hr>
+<h2 id="JVM基础"><a href="#JVM基础" class="headerlink" title="JVM基础"></a>JVM基础</h2><p>JVM（Java Virtual Machine Specification）是一种规范，官方也给出了这种规范的说明文档。<br><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/specs/jvms/se16/jvms16.pdf">JVM说明文档</a>  </p>
+<h3 id="JDK-JRE-JVM的关系"><a href="#JDK-JRE-JVM的关系" class="headerlink" title="JDK JRE JVM的关系"></a>JDK JRE JVM的关系</h3><p><img src="http://qpugd0hk7.hn-bkt.clouddn.com/image/JVM-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/JVM%E4%B8%8EJDK%E7%9A%84%E5%85%B3%E7%B3%BB.png" alt="JVM&amp;JRE&amp;JVM关系">  </p>
+<hr>
+<h2 id="Class文件解读"><a href="#Class文件解读" class="headerlink" title="Class文件解读"></a>Class文件解读</h2><p>以一个简单的程序作为示例：  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">T0100_ByteCode01</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其字节码文件为如下图所示：<br><img src="http://qpugd0hk7.hn-bkt.clouddn.com/image/JVM-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/%E5%AD%97%E8%8A%82%E7%A0%81%E6%96%87%E4%BB%B6.png" alt="字节码文件"><br><code>CA FE BA BE</code>表示的是java的字节码文件；<br><code>00 00</code>代表的是副版本号；<br><code>00 35</code>代表的是主版本号，对应16进制为53；<br><code>00 10</code>代表的是常量池的长度，这里表示有长度为16的常量池，但是常量池里的数量为长度-1，即有15个常量在常量池中；<br><code>0A</code>代表的是常量池中的标签号，即#10，这个标签对应的是CONSTANT Methodref_info;<br><code>00 03 00 0D</code>为第一个常量中的内容,<code>00 03</code>表示这个方法的类，指向的是常量池中的第3个常量，<code>00 0D</code>表示这个方法的名字和描述，指向的是常量池中的第13个常量；<br>其后依次介绍了剩下的14个常量的信息；<br><code>00 21</code>代表此类的访问标志为public，是由0x0001和0x0020与运算得到。<br>访问标志的对照表：  </p>
+<table>
+<thead>
+<tr>
+<th align="left">访问标志</th>
+<th align="center">16进制码</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ACC_PUBLIC</td>
+<td align="center">0x0001</td>
+<td align="left">public</td>
+</tr>
+<tr>
+<td align="left">ACC_FINAL</td>
+<td align="center">0x0010</td>
+<td align="left">final</td>
+</tr>
+<tr>
+<td align="left">ACC_SUPER</td>
+<td align="center">0x0020</td>
+<td align="left">该标志必须为真</td>
+</tr>
+<tr>
+<td align="left">ACC_INTERFACE</td>
+<td align="center">0x0200</td>
+<td align="left">interface接口</td>
+</tr>
+<tr>
+<td align="left">ACC_ABSTRACT</td>
+<td align="center">0x0400</td>
+<td align="left">接口或抽象类</td>
+</tr>
+<tr>
+<td align="left">ACC_SYNTHETIC</td>
+<td align="center">0x1000</td>
+<td align="left">编译器自动生成，非用户代码产生</td>
+</tr>
+<tr>
+<td align="left">ACC_ANNOTATION</td>
+<td align="center">0x2000</td>
+<td align="left">注解</td>
+</tr>
+<tr>
+<td align="left">ACC_ENUM</td>
+<td align="center">0x4000</td>
+<td align="left">枚举</td>
+</tr>
+</tbody></table>
+<p><code>00 02</code>表示本类索引，指向常量池中的2号元素；<br><code>00 03</code>表示父类索引，指向常量池中的3号元素；<br>其后8个字节分别代表此类引用的接口数量、字段数量、方法数量和属性数量；<br>剩下的内容均为对这些方法、属性的具体描述。<br>代码解释如下：<br><img src="http://qpugd0hk7.hn-bkt.clouddn.com/image/JVM-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/%E5%AD%97%E8%8A%82%E7%A0%81%E8%A7%A3%E9%87%8A.png" alt="字节码解释"><br>附上常量池中各类型的标签对照：  </p>
+<table>
+<thead>
+<tr>
+<th align="center">标签号<br />（占用1个字节）</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td>CONSTANT_Utf8_info</td>
+<td>length：UTF-8字符串占用的字节数；<br />bytes：长度为length的字符串</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td>CONSTANT_Integer_info</td>
+<td>bytes：4个字节的int值</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td>CONSTANT_Float_info</td>
+<td>bytes：4个字节的float值</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td>CONSTANT_Long_info</td>
+<td>bytes：8个字节的long值</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td>CONSTANT_Double_info</td>
+<td>bytes：8个字节的double值</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td>CONSTANT_Class_info</td>
+<td>index：2个字节，指向类的全限定名项的索引</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td>CONSTANT_String_info</td>
+<td>index：2个字节，指向字符串字面量的索引</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td>CONSTANT_Fieldref_info</td>
+<td>index：2个字节，指向声明字段的类或者接口描述符CONSTANT_Class_info的索引项<br />index：2个字节，指向字段描述符CONSTANT_NameAndType的索引项</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td>CONSTANT_Methodref_info</td>
+<td>index：2个字节，指向声明方法的类或者接口描述符CONSTANT_Class_info<br />index：2个字节，指向字段描述符CONSTANT_NameAndType的索引项</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td>CONSTANT_InterfaceMethodref_info</td>
+<td>index：2个字节，指向声明方法的类或者接口描述符CONSTANT_Class_info<br />index：2个字节，指向字段描述符CONSTANT_NameAndType的索引项</td>
+</tr>
+<tr>
+<td align="center">12</td>
+<td>CONSTANT_NameAndType_info</td>
+<td>index：2个字节，指向该字段或者方法名称常量项的索引<br />index：2个字节，指向该字段或者方法描述符常量的索引</td>
+</tr>
+<tr>
+<td align="center">15</td>
+<td>CONSTANT_MethodHandle_info</td>
+<td>reference_kind：1个字节，1~9之间的一个值，决定了方法句柄的类型。方法句柄类型的值表示方法句柄的字节码行为<br />reference_index：2个字节，对常量池的有效引用</td>
+</tr>
+<tr>
+<td align="center">16</td>
+<td>CONSTANT_MethodType_info</td>
+<td>descriptor_index：2个字节，指向Utf8_info结构表示的方法描述符</td>
+</tr>
+<tr>
+<td align="center">18</td>
+<td>CONSTANT_InvokeDynamic_info</td>
+<td>bootstrap_method_attr_index：2个字节，当前Class文件中引导方法表的bootstrap_methods[]数组的有效索引<br />name_and_type_index：2个字节，指向NameAndType_info表示的方法名和方法描述符</td>
+</tr>
+</tbody></table>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -224,354 +417,117 @@
 		</ul>
 	</div>
 
-          
+      
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://lanzhengjian98.github.io/2021/03/17/JVM-Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/17/%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2021-03-17T06:45:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-17</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/03/17/%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">责任链模式</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/17/%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/">责任链模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E7%BC%96%E7%A0%81%E5%88%B0%E6%89%A7%E8%A1%8C"><span class="toc-number">1.</span> <span class="toc-text">从编码到执行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM%E5%9F%BA%E7%A1%80"><span class="toc-number">2.</span> <span class="toc-text">JVM基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JDK-JRE-JVM%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">2.1.</span> <span class="toc-text">JDK JRE JVM的关系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Class%E6%96%87%E4%BB%B6%E8%A7%A3%E8%AF%BB"><span class="toc-number">3.</span> <span class="toc-text">Class文件解读</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/17/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2021-03-17T06:06:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-17</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/17/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">代理模式</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/17/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2021-03-17T05:30:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/17/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F/">享元模式</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/17/%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2021-03-17T05:07:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/17/%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/">外观模式</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/16/%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2021-03-16T07:02:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/16/%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/">装饰器模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/16/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2021-03-16T06:29:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/16/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/">组合模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/16/%E8%BF%87%E6%BB%A4%E5%99%A8%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2021-03-16T03:01:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/16/%E8%BF%87%E6%BB%A4%E5%99%A8%E6%A8%A1%E5%BC%8F/">过滤器模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/16/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2021-03-16T00:51:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/16/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/">桥接模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/15/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2021-03-15T05:49:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/15/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/">适配器模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2021/page/2/">2</a><a class="extend next" rel="next" href="/archives/2021/page/2/">下一页</a>
-    </nav>
   
 
 
@@ -599,8 +555,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
