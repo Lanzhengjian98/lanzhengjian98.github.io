@@ -6,15 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Lanzhengjian98</title>
+  <title>备忘录模式 | Lanzhengjian98</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Lanzhengjian98">
-<meta property="og:url" content="http://example.com/page/3/index.html">
+  <meta name="description" content="介绍备忘录模式保存一个对象的某个状态，以便在适当的时候恢复对象。这种模式实现了信息的封装，使得用户不需要关系状态的保存细节。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="备忘录模式">
+<meta property="og:url" content="http://example.com/2021/03/20/%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Lanzhengjian98">
+<meta property="og:description" content="介绍备忘录模式保存一个对象的某个状态，以便在适当的时候恢复对象。这种模式实现了信息的封装，使得用户不需要关系状态的保存细节。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/%E5%8E%9F%E7%90%86%E5%9B%BE.png">
+<meta property="og:image" content="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png">
+<meta property="article:published_time" content="2021-03-20T06:59:28.000Z">
+<meta property="article:modified_time" content="2021-03-20T07:27:30.553Z">
 <meta property="article:author" content="Mr Lan">
+<meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/%E5%8E%9F%E7%90%86%E5%9B%BE.png">
   
     <link rel="alternative" href="/atom.xml" title="Lanzhengjian98" type="application/atom+xml">
   
@@ -184,33 +192,129 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-    <article id="post-工厂模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+<article id="post-备忘录模式" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/13/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">工厂模式</a>
+    <h1 class="article-title" itemprop="name">
+      备忘录模式
     </h1>
   
 
         
-        <a href="/2021/03/13/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2021-03-13T08:16:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-13</time>
+        <a href="/2021/03/20/%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
+  	<time datetime="2021-03-20T06:59:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>定义一个创建对象的接口，让其子类自己决定实例化哪一个工厂类，工厂模式使其创建过程延迟到子类进行。举个例子，当需要一台汽车的时候，可以直接去车厂购买一台汽车，而不用管它是如何制造出来的，这个汽车工厂自己完成了汽车的制造，这就是工厂模式。</p>
-        
-          <a class="article-more-a" href="/2021/03/13/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/#more">more >></a>
-        
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>备忘录模式保存一个对象的某个状态，以便在适当的时候恢复对象。这种模式实现了信息的封装，使得用户不需要关系状态的保存细节。  </p>
+<span id="more"></span>  
+
+<hr>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>备忘录模式使用三个类Memento、Originator和CareTaker。Memento包含了要被恢复的对象的状态。Originator创建并在Memento对象中存储状态。CareTaker对象负责从Memento中恢复对象的状态。<br>MementoPatternDemo，我们的演示类使用CareTaker和Originator对象来显示对象的状态恢复。<br>其原理图如下：<br><img src="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/%E5%8E%9F%E7%90%86%E5%9B%BE.png" alt="备忘录模式原理图">  </p>
+<h3 id="步骤1"><a href="#步骤1" class="headerlink" title="步骤1"></a>步骤1</h3><p>创建Memento类：  </p>
+<pre><code class="java">public class Memento &#123;
+    private String state;
+
+    public Memento(String state) &#123;
+        this.state = state;
+    &#125;
+
+    public String getState() &#123;
+        return state;
+    &#125;
+&#125;
+</code></pre>
+<h3 id="步骤2"><a href="#步骤2" class="headerlink" title="步骤2"></a>步骤2</h3><p>创建Originator类：  </p>
+<pre><code class="java">public class Originator &#123;
+    private String state;
+
+    public String getState() &#123;
+        return state;
+    &#125;
+
+    public void setState(String state) &#123;
+        this.state = state;
+    &#125;
+    
+    public Memento saveStateToMemento() &#123;
+        return new Memento(state);
+    &#125;
+    
+    public void getStateFromMemento(Memento memento) &#123;
+        state = memento.getState();
+    &#125;
+&#125;
+</code></pre>
+<h3 id="步骤3"><a href="#步骤3" class="headerlink" title="步骤3"></a>步骤3</h3><p>创建CareTaker类：  </p>
+<pre><code class="java">public class CareTaker &#123;
+    private List&lt;Memento&gt; mementoList = new ArrayList&lt;&gt;();
+    
+    public void add(Memento state) &#123;
+        mementoList.add(state);
+    &#125;
+
+    public Memento get(int index) &#123;
+        return mementoList.get(index);
+    &#125;
+&#125;
+</code></pre>
+<h3 id="步骤4"><a href="#步骤4" class="headerlink" title="步骤4"></a>步骤4</h3><p>使用CareTaker和Originator对象：  </p>
+<pre><code class="java">public class MementoPatternDemo &#123;
+    public static void main(String[] args) &#123;
+        Originator originator = new Originator();
+        CareTaker careTaker = new CareTaker();
+        originator.setState(&quot;State #1&quot;);
+        originator.setState(&quot;State #2&quot;);
+        careTaker.add(originator.saveStateToMemento());
+        originator.setState(&quot;State #3&quot;);
+        careTaker.add(originator.saveStateToMemento());
+        originator.setState(&quot;State #4&quot;);
+        careTaker.add(originator.saveStateToMemento());
+
+        System.out.println(&quot;Current State: &quot; + originator.getState());
+        originator.getStateFromMemento(careTaker.get(0));
+        System.out.println(&quot;First saved State: &quot; + originator.getState());
+        originator.getStateFromMemento(careTaker.get(1));
+        System.out.println(&quot;Second saved State: &quot; + originator.getState());
+    &#125;
+&#125;
+</code></pre>
+<h3 id="步骤5"><a href="#步骤5" class="headerlink" title="步骤5"></a>步骤5</h3><p>执行程序，输出结果：<br><img src="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png" alt="运行结果"></p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -229,16 +333,75 @@
 
       
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/13/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://lanzhengjian98.github.io/2021/03/20/%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2021/03/20/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">中介者模式</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -253,324 +416,32 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ConcurrentModificationException异常处理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/13/ConcurrentModificationException%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">ConcurrentModificationException异常处理</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/13/ConcurrentModificationException%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" class="archive-article-date">
-  	<time datetime="2021-03-13T03:58:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="ConcurrentModificationException异常出现情景"><a href="#ConcurrentModificationException异常出现情景" class="headerlink" title="ConcurrentModificationException异常出现情景"></a>ConcurrentModificationException异常出现情景</h2><p>ConcurrentModificationException异常通常是由于在集合遍历时删除集合中的元素造成，如下述代码：  </p>
-        
-          <a class="article-more-a" href="/2021/03/13/ConcurrentModificationException%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/13/ConcurrentModificationException%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A41"><span class="toc-number">2.1.</span> <span class="toc-text">步骤1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A42"><span class="toc-number">2.2.</span> <span class="toc-text">步骤2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A43"><span class="toc-number">2.3.</span> <span class="toc-text">步骤3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A44"><span class="toc-number">2.4.</span> <span class="toc-text">步骤4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A45"><span class="toc-number">2.5.</span> <span class="toc-text">步骤5</span></a></li></ol></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
-  
-    <article id="post-设计模式分类与原则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%88%86%E7%B1%BB%E4%B8%8E%E5%8E%9F%E5%88%99/">设计模式分类与原则</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%88%86%E7%B1%BB%E4%B8%8E%E5%8E%9F%E5%88%99/" class="archive-article-date">
-  	<time datetime="2021-03-12T12:43:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="设计模式分类与原则"><a href="#设计模式分类与原则" class="headerlink" title="设计模式分类与原则"></a>设计模式分类与原则</h2><p>设计模式一共分为23种设计模式。主要分为三大类：创建型模式（Creational Patterns）、结构型模式（Structural Patterns）、行为型模式（Behavioral Patterns）。此外还有一种J2EE设计模式。  </p>
-        
-          <a class="article-more-a" href="/2021/03/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%88%86%E7%B1%BB%E4%B8%8E%E5%8E%9F%E5%88%99/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%88%86%E7%B1%BB%E4%B8%8E%E5%8E%9F%E5%88%99/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Markdown文档编写规则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/12/Markdown%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99%E8%A7%84%E5%88%99/">Markdown文档编写规则</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/12/Markdown%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99%E8%A7%84%E5%88%99/" class="archive-article-date">
-  	<time datetime="2021-03-12T05:57:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><ul>
-<li>在标题前加#，可以将文字设置为标题，根据#号的个数可以设置1~6级标题  </li>
-<li>#和标题内容之间需要留一个空格，换行时需要留一个以上的空格</li>
-</ul>
-        
-          <a class="article-more-a" href="/2021/03/12/Markdown%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99%E8%A7%84%E5%88%99/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Markdown</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/12/Markdown%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99%E8%A7%84%E5%88%99/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/10/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/10/hello-world/" class="archive-article-date">
-  	<time datetime="2021-03-10T10:25:44.415Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-        
-          <a class="article-more-a" href="/2021/03/10/hello-world/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/10/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -597,8 +468,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
