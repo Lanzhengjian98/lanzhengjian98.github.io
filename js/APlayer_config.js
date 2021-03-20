@@ -16,21 +16,21 @@ const ap = new APlayer({
     audio: [{
         name: '相信你的人',
         artist: '陈奕迅',
-        lrc: 'http://qpugd0hk7.hn-bkt.clouddn.com/music/lrc/%E7%9B%B8%E4%BF%A1%E4%BD%A0%E7%9A%84%E4%BA%BA-%E9%99%88%E5%A5%95%E8%BF%85.lrc',
+        lrc: '/assets/lrc/相信你的人-陈奕迅.lrc',
         cover: 'http://p4.music.126.net/q0pAbNpw5OA6yo3RFMvAxQ==/109951164194081148.jpg?param=300x300',
         url: 'http://music.163.com/song/media/outer/url?id=1376091684.mp3'
       },
       {
         name: '人来人往 (Live)',
         artist: '陈奕迅',
-        lrc: 'http://qpugd0hk7.hn-bkt.clouddn.com/music/lrc/%E4%BA%BA%E6%9D%A5%E4%BA%BA%E5%BE%80%20%28Live%29-%E9%99%88%E5%A5%95%E8%BF%85.lrc',
+        lrc: '/assets/lrc/人来人往 (Live)-陈奕迅.lrc',
         cover: 'http://p4.music.126.net/LE6HV_Y5-HXFfdXKGhJ94Q==/109951163104933982.jpg?param=300x300',
         url: 'http://music.163.com/song/media/outer/url?id=65923.mp3'
       },
       {
         name: '高山低谷',
         artist: '林奕匡',
-        lrc: 'http://qpugd0hk7.hn-bkt.clouddn.com/music/lrc/%E9%AB%98%E5%B1%B1%E4%BD%8E%E8%B0%B7-%E6%9E%97%E5%A5%95%E5%8C%A1.lrc',
+        lrc: '/assets/lrc/高山低谷-林奕匡.lrc',
         cover: 'http://p4.music.126.net/-Ghh732Mw5P7SroEr954qA==/6011030069358994.jpg?param=300x300',
         url: 'http://music.163.com/song/media/outer/url?id=28457932.mp3'
       }
