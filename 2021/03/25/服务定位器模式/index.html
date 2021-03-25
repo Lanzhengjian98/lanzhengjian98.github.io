@@ -6,20 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Hello World | Lanzhengjian98</title>
+  <title>服务定位器模式 | Lanzhengjian98</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+  <meta name="description" content="介绍服务定位器模式（Service Locator Pattern）用在我们想使用JNDI查询定位各种服务的时候。考虑到为某个服务查找JNDI的代价很高，服务定位器模式充分利用了缓存技术。在首次请求的某个服务时，服务定位器在JNDI中查找服务，并缓存该服务对象。当再次请求相同的服务时，服务定位器会在它的缓存中查找，这样可以在很大程度上提高应用程序的性能。以下是这种设计模式的实体。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://example.com/2021/03/10/hello-world/index.html">
+<meta property="og:title" content="服务定位器模式">
+<meta property="og:url" content="http://example.com/2021/03/25/%E6%9C%8D%E5%8A%A1%E5%AE%9A%E4%BD%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Lanzhengjian98">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta property="og:description" content="介绍服务定位器模式（Service Locator Pattern）用在我们想使用JNDI查询定位各种服务的时候。考虑到为某个服务查找JNDI的代价很高，服务定位器模式充分利用了缓存技术。在首次请求的某个服务时，服务定位器在JNDI中查找服务，并缓存该服务对象。当再次请求相同的服务时，服务定位器会在它的缓存中查找，这样可以在很大程度上提高应用程序的性能。以下是这种设计模式的实体。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-03-10T10:25:44.415Z">
-<meta property="article:modified_time" content="2021-03-11T06:59:43.600Z">
+<meta property="og:image" content="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E6%9C%8D%E5%8A%A1%E5%AE%9A%E4%BD%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/%E5%8E%9F%E7%90%86%E5%9B%BE.png">
+<meta property="og:image" content="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E6%9C%8D%E5%8A%A1%E5%AE%9A%E4%BD%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png">
+<meta property="article:published_time" content="2021-03-25T10:54:28.000Z">
+<meta property="article:modified_time" content="2021-03-25T11:29:41.501Z">
 <meta property="article:author" content="Mr Lan">
-<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E6%9C%8D%E5%8A%A1%E5%AE%9A%E4%BD%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/%E5%8E%9F%E7%90%86%E5%9B%BE.png">
   
     <link rel="alternative" href="/atom.xml" title="Lanzhengjian98" type="application/atom+xml">
   
@@ -189,41 +192,151 @@
           </div>
           <div id="js-content" class="content-ll">
             
-<article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+<article id="post-服务定位器模式" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      服务定位器模式
     </h1>
   
 
         
-        <a href="/2021/03/10/hello-world/" class="archive-article-date">
-  	<time datetime="2021-03-10T10:25:44.415Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-10</time>
+        <a href="/2021/03/25/%E6%9C%8D%E5%8A%A1%E5%AE%9A%E4%BD%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
+  	<time datetime="2021-03-25T10:54:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-25</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<span id="more"></span>
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>服务定位器模式（Service Locator Pattern）用在我们想使用JNDI查询定位各种服务的时候。考虑到为某个服务查找JNDI的代价很高，服务定位器模式充分利用了缓存技术。在首次请求的某个服务时，服务定位器在JNDI中查找服务，并缓存该服务对象。当再次请求相同的服务时，服务定位器会在它的缓存中查找，这样可以在很大程度上提高应用程序的性能。以下是这种设计模式的实体。  </p>
+<span id="more"></span>  
 
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>服务（Service）：实际处理请求的服务。对这种服务的引用可以在JNDI服务器中查找到。  </li>
+<li>Context/初始的Context：JNDI Context带有对要查找的服务的引用。  </li>
+<li>服务定位器（Service Locator）：服务定位器是通过JNDI查找和缓存服务来获取服务的单点接触。  </li>
+<li>缓存（Cache）：缓存存储服务的引用，以便复用它们。  </li>
+<li>客户端（Client）：Client是通过ServiceLocator调用服务的对象。  </li>
+</ul>
+<hr>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>我们将创建ServiceLocator、InitialContext、Cache、Service作为表示实体的各种对象。Service1和Service2表示实体服务。<br>ServiceLocatorPatternDemo类在这里作为一个客户端，将使用ServiceLocator来演示服务定位器设计模式。<br>其原理图如下：<br><img src="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E6%9C%8D%E5%8A%A1%E5%AE%9A%E4%BD%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/%E5%8E%9F%E7%90%86%E5%9B%BE.png" alt="服务定位器模式原理图">  </p>
+<h3 id="步骤1"><a href="#步骤1" class="headerlink" title="步骤1"></a>步骤1</h3><p>创建服务接口Service：  </p>
+<pre><code class="java">public interface Service &#123;
+    public String getName();
+    public void execute();
+&#125;
+</code></pre>
+<h3 id="步骤2"><a href="#步骤2" class="headerlink" title="步骤2"></a>步骤2</h3><p>创建实体服务：  </p>
+<pre><code class="java">public class Service1 implements Service&#123;
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+    @Override
+    public String getName() &#123;
+        return &quot;Service1&quot;;
+    &#125;
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+    @Override
+    public void execute() &#123;
+        System.out.println(&quot;Executing Service1&quot;);
+    &#125;
+&#125;
+</code></pre>
+<pre><code class="java">public class Service2 implements Service&#123;
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+    @Override
+    public String getName() &#123;
+        return &quot;Service2&quot;;
+    &#125;
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    @Override
+    public void execute() &#123;
+        System.out.println(&quot;Executing Service2&quot;);
+    &#125;
+&#125;
+</code></pre>
+<h3 id="步骤3"><a href="#步骤3" class="headerlink" title="步骤3"></a>步骤3</h3><p>为JNDI查询创建InitialContext：  </p>
+<pre><code class="java">public class InitialContext &#123;
+    public Object lookup(String jndiName) &#123;
+        if (jndiName.equalsIgnoreCase(&quot;SERVICE1&quot;)) &#123;
+            System.out.println(&quot;Looking up and creating a new Service1 object&quot;);
+            return new Service1();
+        &#125; else if (jndiName.equalsIgnoreCase(&quot;SERVICE2&quot;)) &#123;
+            System.out.println(&quot;Looking up and creating a new Service2 object&quot;);
+            return new Service2();
+        &#125;
+        return null;
+    &#125;
+&#125;
+</code></pre>
+<h3 id="步骤4"><a href="#步骤4" class="headerlink" title="步骤4"></a>步骤4</h3><p>创建缓存Cache：  </p>
+<pre><code class="java">public class Cache &#123;
+    private List&lt;Service&gt; services;
+
+    public Cache() &#123;
+        services = new ArrayList&lt;&gt;();
+    &#125;
+    
+    public Service getService(String serviceName) &#123;
+        for (Service service : services) &#123;
+            if (service.getName().equalsIgnoreCase(serviceName)) &#123;
+                System.out.println(&quot;Returning cached &quot; + serviceName + &quot; object&quot;);
+                return service;
+            &#125;
+        &#125;
+        return null;
+    &#125;
+    
+    public void addService(Service newService) &#123;
+        boolean exists = false;
+        for (Service service : services) &#123;
+            if (service.getName().equalsIgnoreCase(newService.getName())) &#123;
+                exists = true;
+            &#125;
+        &#125;
+        if (!exists) &#123;
+            services.add(newService);
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h3 id="步骤5"><a href="#步骤5" class="headerlink" title="步骤5"></a>步骤5</h3><p>创建服务定位器：  </p>
+<pre><code class="java">public class ServiceLocator &#123;
+    private static Cache cache;
+    
+    static &#123;
+        cache = new Cache();
+    &#125;
+    public static Service getService(String jndiName) &#123;
+        Service service = cache.getService(jndiName);
+        if (service != null) &#123;
+            return service;
+        &#125;
+        InitialContext context = new InitialContext();
+        Service service1 = (Service) context.lookup(jndiName);
+        cache.addService(service1);
+        return service1;
+    &#125;
+&#125;
+</code></pre>
+<h3 id="步骤6"><a href="#步骤6" class="headerlink" title="步骤6"></a>步骤6</h3><p>使用ServiceLocator来演示服务定位器设计模式：  </p>
+<pre><code class="java">public class ServiceLocatorPatternDemo &#123;
+    public static void main(String[] args) &#123;
+        Service service = ServiceLocator.getService(&quot;Service1&quot;);
+        service.execute();
+        service = ServiceLocator.getService(&quot;Service2&quot;);
+        service.execute();
+        System.out.println(&quot;-----第二次访问开始-----&quot;);
+        service = ServiceLocator.getService(&quot;Service1&quot;);
+        service.execute();
+        service = ServiceLocator.getService(&quot;Service2&quot;);
+        service.execute();
+    &#125;
+&#125;
+</code></pre>
+<h3 id="步骤7"><a href="#步骤7" class="headerlink" title="步骤7"></a>步骤7</h3><p>执行程序，输出结果：<br><img src="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E6%9C%8D%E5%8A%A1%E5%AE%9A%E4%BD%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png" alt="运行结果"></p>
 
       
 
@@ -263,7 +376,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
         		</li>
       		
 		</ul>
@@ -318,7 +431,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://lanzhengjian98.github.io/2021/03/10/hello-world/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://lanzhengjian98.github.io/2021/03/25/%E6%9C%8D%E5%8A%A1%E5%AE%9A%E4%BD%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -332,15 +445,20 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/03/12/Markdown%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99%E8%A7%84%E5%88%99/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/03/25/%E4%BC%A0%E8%BE%93%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Markdown文档编写规则
+          传输对象模式
         
       </div>
     </a>
   
+  
+    <a href="/2021/03/25/%E6%8B%A6%E6%88%AA%E8%BF%87%E6%BB%A4%E5%99%A8%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">拦截过滤器模式</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -365,7 +483,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A41"><span class="toc-number">2.1.</span> <span class="toc-text">步骤1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A42"><span class="toc-number">2.2.</span> <span class="toc-text">步骤2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A43"><span class="toc-number">2.3.</span> <span class="toc-text">步骤3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A44"><span class="toc-number">2.4.</span> <span class="toc-text">步骤4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A45"><span class="toc-number">2.5.</span> <span class="toc-text">步骤5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A46"><span class="toc-number">2.6.</span> <span class="toc-text">步骤6</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A47"><span class="toc-number">2.7.</span> <span class="toc-text">步骤7</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
