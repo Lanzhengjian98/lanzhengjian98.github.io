@@ -6,23 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>中介者模式 | Lanzhengjian98</title>
+  <title>前端控制器模式 | Lanzhengjian98</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="介绍中介者模式是用来降低多个对象和类之间的通信复杂性。这种模式提供了一个中介类，该类通常处理不同类之间的通信，并支持松耦合，使代码易于维护。">
+  <meta name="description" content="介绍前端控制器模式（Front Controller Pattern）是用来提供一个集中的请求处理机制，所有的请求都将由一个单一的处理程序处理。该处理程序可以做认证&#x2F;授权&#x2F;记录日志，或者跟踪请求，然后把请求传给相应的处理程序。以下是这种设计模式的实体：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="中介者模式">
-<meta property="og:url" content="http://example.com/2021/03/20/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:title" content="前端控制器模式">
+<meta property="og:url" content="http://example.com/2021/03/25/%E5%89%8D%E7%AB%AF%E6%8E%A7%E5%88%B6%E5%99%A8%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Lanzhengjian98">
-<meta property="og:description" content="介绍中介者模式是用来降低多个对象和类之间的通信复杂性。这种模式提供了一个中介类，该类通常处理不同类之间的通信，并支持松耦合，使代码易于维护。">
+<meta property="og:description" content="介绍前端控制器模式（Front Controller Pattern）是用来提供一个集中的请求处理机制，所有的请求都将由一个单一的处理程序处理。该处理程序可以做认证&#x2F;授权&#x2F;记录日志，或者跟踪请求，然后把请求传给相应的处理程序。以下是这种设计模式的实体：">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F/%E5%8E%9F%E7%90%86%E5%9B%BE.png">
-<meta property="og:image" content="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F/%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png">
-<meta property="article:published_time" content="2021-03-20T06:37:43.000Z">
-<meta property="article:modified_time" content="2021-03-20T06:59:07.946Z">
+<meta property="og:image" content="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E5%89%8D%E7%AB%AF%E6%8E%A7%E5%88%B6%E5%99%A8%E6%A8%A1%E5%BC%8F/%E5%8E%9F%E7%90%86%E5%9B%BE.png">
+<meta property="og:image" content="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E5%89%8D%E7%AB%AF%E6%8E%A7%E5%88%B6%E5%99%A8%E6%A8%A1%E5%BC%8F/%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png">
+<meta property="article:published_time" content="2021-03-25T08:14:48.000Z">
+<meta property="article:modified_time" content="2021-03-25T08:41:35.933Z">
 <meta property="article:author" content="Mr Lan">
 <meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F/%E5%8E%9F%E7%90%86%E5%9B%BE.png">
+<meta name="twitter:image" content="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E5%89%8D%E7%AB%AF%E6%8E%A7%E5%88%B6%E5%99%A8%E6%A8%A1%E5%BC%8F/%E5%8E%9F%E7%90%86%E5%9B%BE.png">
   
     <link rel="alternative" href="/atom.xml" title="Lanzhengjian98" type="application/atom+xml">
   
@@ -192,71 +192,101 @@
           </div>
           <div id="js-content" class="content-ll">
             
-<article id="post-中介者模式" class="article article-type-post " itemscope itemprop="blogPost">
+<article id="post-前端控制器模式" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      中介者模式
+      前端控制器模式
     </h1>
   
 
         
-        <a href="/2021/03/20/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2021-03-20T06:37:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-20</time>
+        <a href="/2021/03/25/%E5%89%8D%E7%AB%AF%E6%8E%A7%E5%88%B6%E5%99%A8%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
+  	<time datetime="2021-03-25T08:14:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-25</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>中介者模式是用来降低多个对象和类之间的通信复杂性。这种模式提供了一个中介类，该类通常处理不同类之间的通信，并支持松耦合，使代码易于维护。  </p>
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>前端控制器模式（Front Controller Pattern）是用来提供一个集中的请求处理机制，所有的请求都将由一个单一的处理程序处理。该处理程序可以做认证/授权/记录日志，或者跟踪请求，然后把请求传给相应的处理程序。以下是这种设计模式的实体：  </p>
 <span id="more"></span>  
 
+<ul>
+<li>前端控制器（Front Controller）：处理应用程序所有类型请求的单个处理程序，应该程序可以是基于web的应用程序，也可以是基于桌面的应用程序。  </li>
+<li>调度器（Dispatcher）：前端控制器可能使用一个调度器对象来调度请求到相应的具体处理程序。  </li>
+<li>视图（View）：视图是为请求而创建的对象。  </li>
+</ul>
 <hr>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>我们通过聊天室实例来演示中介者模式。实例中，多个用户可以向聊天室发送消息，聊天室向所有的用户显示消息。我们将创建两个类ChatRoom和User。User对象使用ChatRoom方法来分享他们的消息。<br>MediatorPatternDemo，我们的演示类使用User对象来显示他们之间的通信。<br>其原理图如下：<br><img src="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F/%E5%8E%9F%E7%90%86%E5%9B%BE.png" alt="中介者模式原理图">  </p>
-<h3 id="步骤1"><a href="#步骤1" class="headerlink" title="步骤1"></a>步骤1</h3><p>创建中介类：  </p>
-<pre><code class="java">public class ChatRoom &#123;
-    public static void showMessage(User user, String message) &#123;
-        System.out.println(new Date().toString() + &quot; [&quot; + user.getName() + &quot;] : &quot; + message);
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>我们将创建FrontController、Dispatcher分别当作前端控制器和调度器。HomeView和StudentView表示各种为前端控制器接收到的请求而创建的视图。<br>FrontControllerPatternDemo，我们的演示类使用FrontController来演示前端控制器模式。<br>其原理图如下：<br><img src="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E5%89%8D%E7%AB%AF%E6%8E%A7%E5%88%B6%E5%99%A8%E6%A8%A1%E5%BC%8F/%E5%8E%9F%E7%90%86%E5%9B%BE.png" alt="前端控制器模式原理图">  </p>
+<h3 id="步骤1"><a href="#步骤1" class="headerlink" title="步骤1"></a>步骤1</h3><p>创建视图：  </p>
+<pre><code class="java">public class HomeView &#123;
+    public void show() &#123;
+        System.out.println(&quot;Displaying Home Page&quot;);
     &#125;
 &#125;
 </code></pre>
-<h3 id="步骤2"><a href="#步骤2" class="headerlink" title="步骤2"></a>步骤2</h3><p>创建User类：  </p>
-<pre><code class="java">public class User &#123;
-    private String name;
-
-    public User(String name) &#123;
-        this.name = name;
-    &#125;
-
-    public String getName() &#123;
-        return name;
-    &#125;
-
-    public void setName(String name) &#123;
-        this.name = name;
-    &#125;
-
-    public void sendMessage(String message) &#123;
-        ChatRoom.showMessage(this,message);
+<pre><code class="java">public class StudentView &#123;
+    public void show() &#123;
+        System.out.println(&quot;Displaying Student Page&quot;);
     &#125;
 &#125;
 </code></pre>
-<h3 id="步骤3"><a href="#步骤3" class="headerlink" title="步骤3"></a>步骤3</h3><p>使用User对象来显示他们之间的通信：  </p>
-<pre><code class="java">public class MediatorPatternDemo &#123;
+<h3 id="步骤2"><a href="#步骤2" class="headerlink" title="步骤2"></a>步骤2</h3><p>创建调度器Dispatcher：  </p>
+<pre><code class="java">public class Dispatcher &#123;
+    private StudentView studentView;
+    private HomeView homeView;
+
+    public Dispatcher() &#123;
+        studentView = new StudentView();
+        homeView = new HomeView();
+    &#125;
+    public void dispatch(String request) &#123;
+        if (request.equalsIgnoreCase(&quot;STUDENT&quot;)) &#123;
+            studentView.show();
+        &#125; else &#123;
+            homeView.show();
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h3 id="步骤3"><a href="#步骤3" class="headerlink" title="步骤3"></a>步骤3</h3><p>创建前端控制器FrontController：  </p>
+<pre><code class="java">public class FrontController &#123;
+    private Dispatcher dispatcher;
+
+    public FrontController() &#123;
+        dispatcher = new Dispatcher();
+    &#125;
+    private boolean isAuthenticUser() &#123;
+        System.out.println(&quot;User is authenticated successfully&quot;);
+        return true;
+    &#125;
+    private void trackRequest(String request) &#123;
+        System.out.println(&quot;Page requested: &quot; + request);
+    &#125;
+    public void dispatchRequest(String request) &#123;
+        //记录每一个请求
+        trackRequest(request);
+        //对用户进行身份验证
+        if (isAuthenticUser()) &#123;
+            dispatcher.dispatch(request);
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h3 id="步骤4"><a href="#步骤4" class="headerlink" title="步骤4"></a>步骤4</h3><p>使用FrontController来演示前端控制器模式：  </p>
+<pre><code class="java">public class FrontControllerPatternDemo &#123;
     public static void main(String[] args) &#123;
-        User robert = new User(&quot;Robert&quot;);
-        User john = new User(&quot;John&quot;);
-
-        robert.sendMessage(&quot;Hi! John!&quot;);
-        john.sendMessage(&quot;Hello! Robert!&quot;);
+        FrontController frontController = new FrontController();
+        frontController.dispatchRequest(&quot;HOME&quot;);
+        frontController.dispatchRequest(&quot;STUDENT&quot;);
     &#125;
 &#125;
 </code></pre>
-<h3 id="步骤4"><a href="#步骤4" class="headerlink" title="步骤4"></a>步骤4</h3><p>执行程序，输出结果：<br><img src="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F/%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png" alt="运行结果"></p>
+<h3 id="步骤5"><a href="#步骤5" class="headerlink" title="步骤5"></a>步骤5</h3><p>执行程序，输出结果：<br><img src="http://qpugd0hk7.hn-bkt.clouddn.com/image/%E5%89%8D%E7%AB%AF%E6%8E%A7%E5%88%B6%E5%99%A8%E6%A8%A1%E5%BC%8F/%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png" alt="运行结果"></p>
 
       
 
@@ -351,7 +381,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://lanzhengjian98.github.io/2021/03/20/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://lanzhengjian98.github.io/2021/03/25/%E5%89%8D%E7%AB%AF%E6%8E%A7%E5%88%B6%E5%99%A8%E6%A8%A1%E5%BC%8F/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -365,18 +395,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/03/20/%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          备忘录模式
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/03/19/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">迭代器模式</div>
+    <a href="/2021/03/25/%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据访问对象模式</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -403,7 +424,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A41"><span class="toc-number">2.1.</span> <span class="toc-text">步骤1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A42"><span class="toc-number">2.2.</span> <span class="toc-text">步骤2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A43"><span class="toc-number">2.3.</span> <span class="toc-text">步骤3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A44"><span class="toc-number">2.4.</span> <span class="toc-text">步骤4</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A41"><span class="toc-number">2.1.</span> <span class="toc-text">步骤1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A42"><span class="toc-number">2.2.</span> <span class="toc-text">步骤2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A43"><span class="toc-number">2.3.</span> <span class="toc-text">步骤3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A44"><span class="toc-number">2.4.</span> <span class="toc-text">步骤4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A45"><span class="toc-number">2.5.</span> <span class="toc-text">步骤5</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
